@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
+  <title>Kaleidoscope Image Lab minimal traced emblem</title>
+  <desc>Minimal dark psychedelic occult emblem traced as a clean SVG with sharp lines and transparent background.</desc>
+
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c7c1b4"/>
+      <stop offset="100%" stop-color="#5f6472"/>
+    </linearGradient>
+    <linearGradient id="irisFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1b2433"/>
+      <stop offset="55%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#3e444f"/>
+    </linearGradient>
+    <linearGradient id="bladeFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5f6773"/>
+      <stop offset="40%" stop-color="#1a1d24"/>
+      <stop offset="100%" stop-color="#90908a"/>
+    </linearGradient>
+    <clipPath id="irisClip">
+      <circle cx="512" cy="512" r="138"/>
+    </clipPath>
+    <style>
+      .metal { stroke: url(#steel); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { stroke: #08090c; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke: #12141a; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+      .finer { stroke: #181b22; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      .ghost { stroke: #2a2e38; stroke-opacity: 0.45; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- Outer minimal geometry -->
+  <circle cx="512" cy="512" r="325" class="fine" />
+  <circle cx="512" cy="512" r="278" class="ghost" />
+  <circle cx="512" cy="512" r="238" class="ghost" />
+
+  <!-- Horizontal anchor line and side nodes -->
+  <line x1="175" y1="512" x2="849" y2="512" class="finer" />
+  <circle cx="180" cy="512" r="16" class="ink" fill="#0a0b0f"/>
+  <circle cx="180" cy="512" r="13" class="metal" fill="none"/>
+  <circle cx="844" cy="512" r="16" class="ink" fill="#0a0b0f"/>
+  <circle cx="844" cy="512" r="13" class="metal" fill="none"/>
+
+  <!-- Top triangle / eye -->
+  <path d="M 512 128 L 448 238 L 576 238 Z" class="ink" fill="#090a0d"/>
+  <path d="M 512 128 L 448 238 L 576 238 Z" class="metal" fill="none"/>
+  <path d="M 486 184 Q 512 165 538 184 Q 512 203 486 184 Z" fill="#08090c" stroke="url(#steel)" stroke-width="2.2"/>
+  <circle cx="512" cy="184" r="6" fill="#0a0b0f" stroke="url(#steel)" stroke-width="1.5"/>
+
+  <!-- Bottom taper -->
+  <path d="M 512 690 C 505 735 500 782 512 848 C 524 782 519 735 512 690" class="finer" />
+  <circle cx="512" cy="758" r="18" class="fine" fill="none"/>
+  <path d="M 512 848 L 500 868 L 512 904 L 524 868 Z" class="fine" fill="none"/>
+
+  <!-- Main star body -->
+  <polygon points="512.00,302.00 577.06,354.94 660.49,363.51 669.06,446.94 722.00,512.00 669.06,577.06 660.49,660.49 577.06,669.06 512.00,722.00 446.94,669.06 363.51,660.49 354.94,577.06 302.00,512.00 354.94,446.94 363.51,363.51 446.94,354.94" class="ink" fill="#0a0b0f"/>
+  <polygon points="512.00,302.00 577.06,354.94 660.49,363.51 669.06,446.94 722.00,512.00 669.06,577.06 660.49,660.49 577.06,669.06 512.00,722.00 446.94,669.06 363.51,660.49 354.94,577.06 302.00,512.00 354.94,446.94 363.51,363.51 446.94,354.94" class="metal" fill="none"/>
+  <polygon points="512.00,352.00 561.75,391.90 625.14,398.86 632.10,462.25 672.00,512.00 632.10,561.75 625.14,625.14 561.75,632.10 512.00,672.00 462.25,632.10 398.86,625.14 391.90,561.75 352.00,512.00 391.90,462.25 398.86,398.86 462.25,391.90" class="fine" fill="none"/>
+
+  <!-- Secondary rings -->
+  <circle cx="512" cy="512" r="196" class="fine" />
+  <circle cx="512" cy="512" r="176" class="metal" />
+  <circle cx="512" cy="512" r="150" class="fine" />
+
+  <!-- Aperture / kaleidoscope center -->
+  <circle cx="512" cy="512" r="142" fill="#07080c" stroke="url(#steel)" stroke-width="3.2"/>
+  <circle cx="512" cy="512" r="138" fill="url(#irisFill)" stroke="#090b10" stroke-width="4"/>
+  <g clip-path="url(#irisClip)">
+    <path d="M 472.03,372.62 Q 512.00,392.00 519.31,452.45 L 531.72,474.92 Q 549.62,408.63 558.17,385.14 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+    <path d="M 582.30,385.18 Q 596.85,427.15 559.28,475.06 L 552.16,499.72 Q 611.69,465.51 634.35,454.95 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+    <path d="M 651.38,472.03 Q 632.00,512.00 571.55,519.31 L 549.08,531.72 Q 615.37,549.62 638.86,558.17 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+    <path d="M 638.82,582.30 Q 596.85,596.85 548.94,559.28 L 524.28,552.16 Q 558.49,611.69 569.05,634.35 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+    <path d="M 551.97,651.38 Q 512.00,632.00 504.69,571.55 L 492.28,549.08 Q 474.38,615.37 465.83,638.86 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+    <path d="M 441.70,638.82 Q 427.15,596.85 464.72,548.94 L 471.84,524.28 Q 412.31,558.49 389.65,569.05 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+    <path d="M 372.62,551.97 Q 392.00,512.00 452.45,504.69 L 474.92,492.28 Q 408.63,474.38 385.14,465.83 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+    <path d="M 385.18,441.70 Q 427.15,427.15 475.06,464.72 L 499.72,471.84 Q 465.51,412.31 454.95,389.65 Z" fill="url(#bladeFill)" stroke="#0b0c10" stroke-width="3"/>
+  </g>
+
+  <circle cx="512" cy="512" r="36" fill="#06070a" stroke="url(#steel)" stroke-width="2"/>
+  <circle cx="512" cy="512" r="8" fill="#d7d4ca"/>
+
+  <!-- Minimal orbit arcs -->
+  <path d="M 332 332 A 255 255 0 0 1 692 332" class="ghost" />
+  <path d="M 330 692 A 255 255 0 0 0 694 692" class="ghost" />
+  <path d="M 398 764 C 470 706 554 706 626 764" class="ghost" />
+
+</svg>
