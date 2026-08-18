@@ -208,6 +208,13 @@ Milestones #20 through #22 establish the reusable Pattern Pack contract through 
 ### Favorites Gallery persistence and thumbnails
 
 - Milestone #5 uses the existing `getState()` / `applyState()` path for saved visual settings. A Favorite stores source transform, geometry/symmetry, Pattern Pack, Polar, Crystal, Effect Stack, animation, and Organic Motion configuration; it does not store generated geometry caches or create a parallel rendering-state model.
+
+### Project serialization and restoration
+
+- Project files use versioned JSON with `format: "kaleidoscope-image-lab-project"` and `version: 1`, plus one complete serializable composition state and a bounded embedded source snapshot. Reuse `getState()` / `applyState()`; do not create a second composition-state model.
+- Store imported or painted source snapshots only when they can be restored without external file paths. Exclude Undo/Redo stacks, renderer caches, generated geometry, transient animation/recording values, preview-only values, and temporary discovery batches.
+- On Open, validate identity, version, required state, and source before mutating the active composition; ignore unknown fields, apply safe defaults for missing optional state, restore the source first, then call the normal state path and reset history to one post-load entry. Restore animation settings without autoplay or recording.
+- Save must serialize the current base state and download JSON without changing controls or history. New Project should reuse existing Reset/default and blank-source paths, avoid a reload, and confirm before discarding an active source when practical.
 - Each Favorite stores a bounded source snapshot and a 180 × 180 thumbnail. The thumbnail is rendered through the shared `drawActiveRenderer()` path, with WebP preferred and PNG fallback. Source snapshots are capped at 1200px on the longest side to keep gallery storage practical.
 - The gallery attempts `localStorage` persistence under a versioned key, filters malformed records, caps the collection at 24 items, and falls back to session-only behavior when the sandboxed iframe cannot access storage or a quota is exceeded. A storage failure must not discard the in-memory gallery or make other Favorites unusable.
 - Restore stops playback, decodes the saved source snapshot, applies the saved state once through `applyState()`, and uses the ordinary history path for one sensible rendering-state entry. Playback phase, preview helpers, project/workspace data, and recording files remain session-only.

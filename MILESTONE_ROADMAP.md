@@ -64,7 +64,7 @@ The project currently favors geometry, visual finishing, sacred geometry, mathem
 | --- | --- | --- | --- | --- | --- |
 | Complete | #2 | Live Animation | **Complete** — eight bounded sine-wave channels, Play/Pause/Stop, reversible settings, and 30 fps preview recording implemented. | Provide basic elapsed-time playback of supported visual parameters without flooding history or breaking still export. | Stable complete state, control synchronization, history isolation, and preview/export consistency. |
 | 17 | #7 | Organic Motion Engine | **Implemented** — static `srcdoc`/script/id QA passed on 2026-08-14; runtime browser QA is pending because the restricted environment blocks localhost and Playwright-launched Chrome aborts before navigation. | Add smooth procedural drift and natural motion as reusable infrastructure. | Milestone #2 timing, bounded interpolation/noise, state synchronization, and long-running performance. |
-| 18 | #3 | Discovery Mode | Not started; depends on Milestones #2 and #7. | Automate guided visual exploration using bounded targets, animation, organic motion, Freeze, and Next controls. | Milestones #2, #7, and #11 plus reversible state transitions. |
+| Complete | #3 | Discovery Mode | **Complete** — static payload/script/id QA passed on 2026-08-17; user-reported desktop/browser QA passed on 2026-08-18. | Generate a small bounded batch of flavor-based candidate compositions, preview them, and apply one through the normal state/history path. | Milestones #11 and #18, complete state snapshots, shared thumbnails, Favorites, and reversible state transitions. |
 | 19 | #17 | Cinematic Animation | Not started. | Add an advanced timeline with keyframes, easing, looping, camera motion, and motion-graphics-style control. | Milestones #2, #7, and #3, serializable timelines, and export planning. |
 
 ## Live Input and Platform Features — Priorities 20–21
@@ -72,11 +72,19 @@ The project currently favors geometry, visual finishing, sacred geometry, mathem
 | Priority | Milestone ID | Milestone | Status | Short goal | Dependencies |
 | --- | --- | --- | --- | --- | --- |
 | 20 | #16 | Live Camera Studio | Not started. | Add efficient real-time camera input, pause, snapshot, and live-source experimentation. | Stable source abstraction, continuous rendering, permissions, performance controls, and compatible visual systems. |
-| 21 | #19 | Workspace System / Workspace and Project System Expansion | Not started; late-stage platform milestone. | Add save/load, persistent workspace state, project management, and long-term versioned usability. | Stable serialization for presets, favorites, effects, Pattern Packs, animation timelines, sources, and preferences. |
+| Complete | #19 | Workspace System / Workspace and Project System Expansion | **Complete** — version-1 JSON Save/Open/New actions are in the Library workspace, with bounded imported/painted source restoration and history-safe state loading. Desktop/browser QA passed on 2026-08-18. | Add save/load, persistent workspace state, project management, and long-term versioned usability. | Stable serialization for presets, favorites, effects, Pattern Packs, animation timelines, sources, and preferences. |
 
 ## Completed milestone records
 
 ### Milestone #1 — Source Navigator — implemented
+
+### Milestone #19 — Workspace / Project System Expansion — complete
+
+The existing Library workspace now contains a compact Project section with New Project, Open Project, and Save Project. Save writes version-1 JSON using the authoritative `getState()` composition snapshot plus a bounded embedded source snapshot. Imported images and painted sources use the existing Favorites canvas/data-URL restoration path, avoiding external file references.
+
+Open validates the project identity, version, required state, and source before changing the active composition. It restores the source first, applies the normalized state through `applyState()`, resets history to one post-load entry, and restores animation/Organic Motion settings without autoplay or recording. New Project uses the existing blank-canvas and Reset/default paths with a compact discard confirmation. Unknown project fields are ignored; project status/dirty tracking is intentionally deferred.
+
+Static validation passed for the escaped outer `srcdoc`, all decoded inline scripts, unique DOM ids, and `git diff --check`. Per user report, desktop/browser QA also passed for native pickers, downloaded JSON inspection, representative imported/painted/combined-stage restoration, history behavior, no-autoplay behavior, responsive Library layout, basic neighboring workspace behavior, and console review.
 
 The navigator shows the oriented source without stretching, supports synchronized pointer dragging and source X/Y controls, remains usable in narrow layouts, and commits at most one Undo state per completed gesture. Physical desktop confirmation remains recommended for file-picker and gesture behavior.
 
@@ -133,6 +141,20 @@ Static QA passed for the outer escaped `srcdoc`, all eight decoded scripts, and 
 Added eight bounded style recipes, three intensity levels, Generate Preset and Regenerate actions, and compact Pattern/Polar/Crystal/Effects include toggles inside the existing Presets and Exploration group. Recipes choose a coherent geometry and transform first, then optionally configure Pattern Pack, Polar, Crystal, and a maximum three-entry Effect Stack with category-specific palettes. Excluded stages preserve the current state; animation is left unchanged and never auto-starts. Generated candidates use the existing `applyState()` path and one history entry, and remain available to the existing Library → Favorites workflow.
 
 Static validation passed for the escaped `srcdoc`, three decoded inline scripts, 230 unique DOM ids, and all 33 generator Pattern Pack references. A temporary headless Chrome document load succeeded, but interactive browser QA could not run in this environment because Python Playwright is unavailable, the bundled Node Playwright browser is not installed, and CDP access to a manually launched Chrome was blocked. Physical desktop-browser QA remains required before marking this milestone complete.
+
+### Milestone #3 — Discovery Mode — complete
+
+Discovery Mode now lives in the existing Library workspace. It provides eight compact flavors — Balanced, Minimal, Geometric, Organic, Psychedelic, Dark, Luminous, and Surprise Me — plus Discover and Regenerate Batch actions. Each batch contains four bounded candidates generated from the existing Milestone #18 procedural recipes rather than a second recipe system.
+
+Candidate previews are lightweight 132 × 132 thumbnails rendered through the shared renderer. Candidate generation stays outside rendering history and leaves the current composition unchanged until Apply. Applying one candidate uses `applyState()` and the ordinary history boundary for one Undo entry, stops active playback so the applied still is clear, never starts animation, and leaves the existing Library → Favorites action as the save workflow. Batches are cleared when the active source changes.
+
+Static validation passed for the escaped outer `srcdoc`, all decoded inline scripts, unique DOM ids, and whitespace errors. Per user report, desktop/browser QA passed on 2026-08-18, closing flavor generation, visual distinctness, Apply/Undo, Favorites save, responsive inspection, and console review.
+
+Files modified for Milestone #3:
+
+- `kaleidoscope-image-lab.html`
+- `PROJECT_NOTES.md`
+- `MILESTONE_ROADMAP.md`
 
 ### Milestone #6 — Palette & Post-Processing Foundation — complete
 
@@ -223,7 +245,7 @@ Candidate families include moiré systems, standing waves, harmonic grids, radia
 ### Exploration, motion, and platform guidance
 
 - Milestone #4 should provide side-by-side selection; Milestone #15 should extend that foundation into multi-generation breeding rather than duplicate it.
-- Milestone #5 establishes durable bounded saved visual states before Milestone #18 depends on save/favorite support; deeper project/workspace persistence remains Milestone #19.
+- Milestone #5 establishes durable bounded saved visual states before Milestone #18 depends on save/favorite support; deeper project/workspace persistence is implemented under Milestone #19.
 - Milestone #2 establishes basic playback and Milestone #7 adds natural drift. Milestone #3 should build on both, and Milestone #17 should follow as the advanced timeline layer.
 - Milestone #16 should reuse the established source and visual pipelines rather than precede them.
 - Milestone #19 is a late-stage persistence and project-management milestone, not a rename of the already completed workspace UI reorganization.

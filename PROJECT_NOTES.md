@@ -315,7 +315,7 @@ Major feature locations are:
 - **Paint:** Painting Mode, New Blank Canvas, Pencil, Marker, Soft Brush, Eraser, size, opacity, color, and status. Painting is presented as editing the active source canvas.
 - **Animation:** Playback contains Play, Pause, Stop, and a global speed multiplier. Motion Channels contains ten opt-in sine-wave modulators for Global Rotation, Zoom/Scale, Source X, Source Y, Center X, Center Y, Pattern Rotation, Pattern Scale, Polar Rotation, and Crystal Strength. Organic Motion is a compact disclosure for Source Position, Center Position, Global Rotation, Zoom/Scale, Pattern Rotation, Polar Rotation, and Crystal Strength, with style, amount, speed, and Orbit Radius where relevant. Recording captures the existing preview canvas at 30 fps through the browser-supported `MediaRecorder` container, so both motion layers are captured automatically.
 - **Effects:** Add Effect control plus a compact ordered stack with enable/disable, expand/collapse, settings, Move Up, Move Down, Duplicate, Remove, and a nearby Reset Stack footer; preview background remains a preview-only aid.
-- **Library:** Export Settings remains available alongside the open Favorites Gallery. Favorites are compact visual snapshots with restore, rename, delete, and inline-confirmed Clear All; deeper project persistence remains reserved for Milestone #19.
+- **Library:** Export Settings remains available alongside the open Favorites Gallery. Favorites are compact visual snapshots with restore, rename, delete, and inline-confirmed Clear All; the Project section provides complete versioned Save/Open/New actions.
 
 At 900px and wider, the shell is full-height with an 88px icon-and-label rail, flexible canvas, and 310–380px independently scrolling controls panel. Below 900px, the canvas and active panel stack while workspace navigation becomes a fixed six-item bottom dock. Below 700px, the global toolbar compacts into one exact six-action row and hides filename/status text to preserve canvas priority. Focus Canvas hides only the rail and controls panel; Show Controls or Escape restores the selected workspace and its state.
 
@@ -591,6 +591,43 @@ Files modified for Milestone #18:
 - `PROJECT_NOTES.md`
 - `DEVELOPMENT_MANUAL.md`
 - `MILESTONE_ROADMAP.md`
+
+### Milestone #3 — Discovery Mode — complete — 2026-08-18
+
+- Added a compact Discovery Mode at the top of the existing Library workspace. It offers Balanced, Minimal, Geometric, Organic, Psychedelic, Dark, Luminous, and Surprise Me flavors.
+- Each batch is capped at four in-memory candidates. Candidates reuse the Milestone #18 Procedural Preset Generator recipes and intensity profiles, configure complete bounded rendering states, preserve the current animation settings without starting playback, and render 132 × 132 thumbnails through the existing `drawActiveRenderer()` path.
+- Candidate generation does not call `applyState()`, change controls, or create history entries. Applying a candidate stops any active playback, applies the candidate through `applyState()`, clears the preset selection, and commits one ordinary rendering-history entry. Undo therefore returns to the pre-apply composition; Favorites remains the existing separate save action.
+- Discovery batches are cleared when a new image or blank canvas is created so previews never remain attached to an earlier source. Regenerate Batch reuses the same bounded four-candidate flow.
+- Created `kaleidoscope-image-lab.html.backup-20260817-120000-milestone3-pre-discovery` before editing. The backup is intentionally untracked.
+- Static QA passed: outer `srcdoc` extraction and entity decoding, 8 embedded script tags with all 3 inline scripts passing `node --check`, 237 unique decoded DOM ids with no duplicates, and `git diff --check`.
+- Per user report, desktop/browser QA was completed successfully on 2026-08-18. The previously deferred checks for flavor generation, four previews, Apply/Undo, Favorites handoff, responsive layout, and console behavior are closed.
+
+Files modified for Milestone #3:
+
+- `kaleidoscope-image-lab.html`
+- `PROJECT_NOTES.md`
+- `MILESTONE_ROADMAP.md`
+
+`DEVELOPMENT_MANUAL.md` was not changed because Discovery Mode reuses the existing procedural recipe, state/history, thumbnail, and renderer paths without adding a reusable architecture layer.
+
+### Milestone #19 — Workspace / Project System Expansion — complete — 2026-08-18
+
+- Added a compact Project section to the existing Library workspace with New Project, Open Project, and Save Project actions. No project browser, Recent Projects, autosave, cloud sync, or dirty-flag system was added.
+- Project files are readable JSON with `{ "format": "kaleidoscope-image-lab-project", "version": 1 }`, a bounded source snapshot, and the complete serializable composition state from `getState()`. The state includes source transforms, geometry/symmetry, Pattern Pack, Polar, Crystal, Effect Stack, animation, and Organic Motion settings.
+- Undo/Redo stacks, renderer caches, generated vector geometry, transient playback/recording values, preview-only values, and Discovery candidate batches are excluded.
+- Imported images reuse the existing bounded Favorites source snapshot path and preserve alpha through the canvas data URL. Painted sources reuse the existing bounded painted-canvas snapshot path, restoring the flattened painted source without external file references.
+- Save downloads `kaleidoscope-project.kilab.json` without changing the composition or history. Open validates format/version/state/source, ignores unknown fields, restores the source before applying state, resets history to one post-load entry, and restores animation settings without autoplay or recording. Invalid files leave the current composition unchanged and report a clear error.
+- New Project reuses the existing blank-canvas and Reset/default paths, clears the prior source without reloading the page, and uses a compact inline discard confirmation when a source is active. Favorites, Procedural Presets, and Discovery remain separate systems.
+- Created `kaleidoscope-image-lab.html.backup-20260818-010000-milestone19-pre-project-system` before editing.
+- Static QA passed: outer `srcdoc` extraction and entity decoding, all 3 decoded inline application scripts with `node --check`, 246 unique decoded DOM ids with no duplicates, and `git diff --check`.
+- Per user report, desktop/browser QA passed for native image/project pickers, downloaded JSON inspection, imported and painted source restoration, combined Pattern + Polar + Crystal + Effects restoration, history behavior, no-autoplay behavior, responsive Library layout, Favorites/Procedural Presets/Discovery smoke checks, and browser-console review.
+
+Files modified for Milestone #19:
+
+- `kaleidoscope-image-lab.html`
+- `PROJECT_NOTES.md`
+- `MILESTONE_ROADMAP.md`
+- `DEVELOPMENT_MANUAL.md`
 
 Backup created for Milestone #11:
 
@@ -882,7 +919,7 @@ Files changed for Milestone #5:
 - Live Animation remains intentionally limited to bounded sine and Organic Motion signals, the supported target subset, and a single global speed multiplier. It has no keyframes, timeline, per-channel phase control, easing editor, audio reaction, or commit-current-frame action.
 - Animation rendering remains synchronous on the main thread and is capped at 30 requested preview renders per second. Dense Pattern Packs and active Polar, Crystal, and Effect stages may run below that rate on slower hardware.
 - Preview recording depends on `canvas.captureStream()` and `MediaRecorder`. Container, codec playback, effective bitrate, and alpha support vary by browser; Safari/Chromium/Firefox interoperability and long-duration memory use remain unverified.
-- Favorites are implemented as bounded visual snapshots, but browser-local persistence depends on storage being available to the sandboxed iframe. The QA browser reported session-only storage, so reload survival still needs confirmation in a browser configuration that permits local storage. Favorites preserve a bounded source snapshot rather than the original full-resolution source; Painting Mode preserves the current painted pixels but not replayable stroke history or brush settings. Project/workspace save/load remains future work under Milestone #19.
+- Favorites are implemented as bounded visual snapshots, but browser-local persistence depends on storage being available to the sandboxed iframe. The QA browser reported session-only storage, so reload survival still needs confirmation in a browser configuration that permits local storage. Favorites preserve a bounded source snapshot rather than the original full-resolution source; Painting Mode preserves the current painted pixels but not replayable stroke history or brush settings. Project Save/Open/New is complete under Milestone #19.
 - Glow is intentionally a lightweight highlight lift rather than a spatial blur/bloom effect; a fuller bloom pass remains outside Milestone #12.
 - During workspace UI QA, the in-app browser again did not deliver physical canvas drags/wheel events and did not expose native picker or saved-download artifacts. Brush selection/source creation, numeric source controls, export completion, shared state, and UI behavior were verified; physical brush strokes, file-picker/drop, wheel/pan feel, and independent saved-file comparison still require a desktop-browser pass.
 - Smart Randomizer output is intentionally nondeterministic and has no seed, scoring, image analysis, variation browser, or favorites integration. Those systems were explicitly outside Milestone #11.

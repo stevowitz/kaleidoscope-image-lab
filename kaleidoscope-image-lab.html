@@ -1260,6 +1260,80 @@ html&gt;body{padding:0}&lt;/style&gt;
       gap: 7px;
     }
 
+    #kaleidoscope-image-lab .kaleido-discovery-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 7px;
+      align-items: end;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-controls .kaleido-control {
+      margin: 0;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-batch {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-card {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+      padding: 8px;
+      border: 1px solid rgb(116 145 151 / 0.22);
+      border-left: 2px solid var(--kaleido-spectrum);
+      border-radius: 8px;
+      background: rgb(255 255 255 / 0.018);
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-thumbnail {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 5px;
+      background: var(--kaleido-panel);
+      object-fit: cover;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-card-title {
+      overflow: hidden;
+      color: var(--kaleido-text);
+      font-size: 11px;
+      font-weight: 650;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-card-meta,
+    #kaleidoscope-image-lab .kaleido-discovery-status {
+      color: var(--kaleido-muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-card-meta {
+      min-height: 2.8em;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-card .btn {
+      min-width: 0;
+      padding-inline: 7px;
+      font-size: 10px;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-footer {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+    }
+
+    #kaleidoscope-image-lab .kaleido-discovery-empty {
+      margin: 0;
+    }
+
     #kaleidoscope-image-lab .kaleido-favorites-status {
       display: block;
       min-height: 17px;
@@ -3392,7 +3466,33 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;/section&gt;
 
       &lt;section id=&quot;kaleido-workspace-library&quot; class=&quot;kaleido-workspace-panel&quot; data-workspace-panel=&quot;library&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;kaleido-workspace-tab-library&quot; hidden&gt;
-        &lt;header class=&quot;kaleido-panel-heading&quot;&gt;&lt;h2 class=&quot;kaleido-panel-title&quot;&gt;Library&lt;/h2&gt;&lt;p class=&quot;kaleido-panel-description&quot;&gt;Keep discoveries close, then return to export when a composition is ready.&lt;/p&gt;&lt;/header&gt;
+        &lt;header class=&quot;kaleido-panel-heading&quot;&gt;&lt;h2 class=&quot;kaleido-panel-title&quot;&gt;Library&lt;/h2&gt;&lt;p class=&quot;kaleido-panel-description&quot;&gt;Explore a small batch, keep the best direction, then return to export.&lt;/p&gt;&lt;/header&gt;
+        &lt;details id=&quot;kaleido-discovery-group&quot; class=&quot;kaleido-control-group&quot; open&gt;
+          &lt;summary&gt;Discovery Mode&lt;/summary&gt;
+          &lt;span class=&quot;kaleido-control-help&quot;&gt;Generate four bounded candidates from a curated flavor. Applying one replaces the composition once; save it with Favorites when it feels right.&lt;/span&gt;
+          &lt;div class=&quot;kaleido-discovery-controls&quot;&gt;
+            &lt;label class=&quot;kaleido-control&quot; for=&quot;kaleido-discovery-flavor&quot;&gt;
+              &lt;span&gt;Flavor&lt;/span&gt;
+              &lt;select id=&quot;kaleido-discovery-flavor&quot; class=&quot;kaleido-select&quot;&gt;
+                &lt;option value=&quot;balanced&quot;&gt;Balanced&lt;/option&gt;
+                &lt;option value=&quot;minimal&quot;&gt;Minimal&lt;/option&gt;
+                &lt;option value=&quot;geometric&quot;&gt;Geometric&lt;/option&gt;
+                &lt;option value=&quot;organic&quot;&gt;Organic&lt;/option&gt;
+                &lt;option value=&quot;psychedelic&quot;&gt;Psychedelic&lt;/option&gt;
+                &lt;option value=&quot;dark&quot;&gt;Dark&lt;/option&gt;
+                &lt;option value=&quot;luminous&quot;&gt;Luminous&lt;/option&gt;
+                &lt;option value=&quot;surprise&quot;&gt;Surprise Me&lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/label&gt;
+            &lt;button type=&quot;button&quot; id=&quot;kaleido-discover&quot; class=&quot;btn btn-primary&quot; disabled&gt;Discover&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div id=&quot;kaleido-discovery-empty&quot; class=&quot;kaleido-empty-state kaleido-discovery-empty&quot;&gt;&lt;strong&gt;No candidates yet.&lt;/strong&gt;&lt;span&gt;Choose a flavor and discover four directions without changing the current composition.&lt;/span&gt;&lt;/div&gt;
+          &lt;div id=&quot;kaleido-discovery-batch&quot; class=&quot;kaleido-discovery-batch&quot; aria-label=&quot;Discovery candidates&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;kaleido-discovery-footer&quot;&gt;
+            &lt;button type=&quot;button&quot; id=&quot;kaleido-discovery-regenerate&quot; class=&quot;btn&quot; disabled&gt;Regenerate Batch&lt;/button&gt;
+            &lt;span id=&quot;kaleido-discovery-status&quot; class=&quot;kaleido-discovery-status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;Load or create an image to begin.&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/details&gt;
         &lt;details id=&quot;kaleido-export-settings&quot; class=&quot;kaleido-control-group&quot; open&gt;
           &lt;summary&gt;Export Settings&lt;/summary&gt;
           &lt;label class=&quot;kaleido-control&quot; for=&quot;kaleido-export-name&quot;&gt;
@@ -3441,9 +3541,21 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;div id=&quot;kaleido-favorites-empty&quot; class=&quot;kaleido-empty-state&quot;&gt;&lt;strong&gt;No favorites yet.&lt;/strong&gt;&lt;span&gt;Save an interesting composition here to return to it later.&lt;/span&gt;&lt;/div&gt;
           &lt;div id=&quot;kaleido-favorites-gallery&quot; class=&quot;kaleido-favorites-grid&quot; aria-label=&quot;Favorites gallery&quot;&gt;&lt;/div&gt;
         &lt;/details&gt;
-        &lt;details class=&quot;kaleido-control-group&quot;&gt;
-          &lt;summary&gt;Saved Work&lt;/summary&gt;
-          &lt;div class=&quot;kaleido-empty-state&quot;&gt;&lt;strong&gt;Project save/load is planned.&lt;/strong&gt;&lt;span&gt;Favorites are lightweight visual snapshots. Deeper project and workspace persistence remains reserved for Milestone #19.&lt;/span&gt;&lt;/div&gt;
+        &lt;details id=&quot;kaleido-project-group&quot; class=&quot;kaleido-control-group&quot; open&gt;
+          &lt;summary&gt;Project&lt;/summary&gt;
+          &lt;span class=&quot;kaleido-control-help&quot;&gt;Save or reopen one complete composition with a bounded source snapshot. Favorites remain lightweight in-app snapshots.&lt;/span&gt;
+          &lt;div class=&quot;kaleido-favorites-actions&quot;&gt;
+            &lt;button type=&quot;button&quot; id=&quot;kaleido-new-project&quot; class=&quot;btn&quot;&gt;New Project&lt;/button&gt;
+            &lt;button type=&quot;button&quot; id=&quot;kaleido-open-project&quot; class=&quot;btn&quot;&gt;Open Project&lt;/button&gt;
+            &lt;button type=&quot;button&quot; id=&quot;kaleido-save-project&quot; class=&quot;btn btn-primary&quot;&gt;Save Project&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;input id=&quot;kaleido-project-file&quot; class=&quot;kaleido-file-input&quot; type=&quot;file&quot; accept=&quot;application/json,.kilab.json&quot;&gt;
+          &lt;div id=&quot;kaleido-new-project-confirm&quot; class=&quot;kaleido-favorite-clear-confirm&quot; hidden&gt;
+            &lt;span&gt;Discard the current composition?&lt;/span&gt;
+            &lt;button type=&quot;button&quot; id=&quot;kaleido-confirm-new-project&quot; class=&quot;btn&quot;&gt;Discard&lt;/button&gt;
+            &lt;button type=&quot;button&quot; id=&quot;kaleido-cancel-new-project&quot; class=&quot;btn&quot;&gt;Cancel&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;span id=&quot;kaleido-project-status&quot; class=&quot;kaleido-favorites-status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;Save a complete working document, or open a version-1 project file.&lt;/span&gt;
         &lt;/details&gt;
       &lt;/section&gt;
       &lt;div id=&quot;kaleido-error&quot; class=&quot;kaleido-error&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
@@ -3573,6 +3685,20 @@ html&gt;body{padding:0}&lt;/style&gt;
   const favoritesClearConfirm = root.querySelector(&#x27;#kaleido-favorites-clear-confirm&#x27;);
   const favoritesEmpty = root.querySelector(&#x27;#kaleido-favorites-empty&#x27;);
   const favoritesGallery = root.querySelector(&#x27;#kaleido-favorites-gallery&#x27;);
+  const discoveryFlavorInput = root.querySelector(&#x27;#kaleido-discovery-flavor&#x27;);
+  const discoverButton = root.querySelector(&#x27;#kaleido-discover&#x27;);
+  const regenerateDiscoveryButton = root.querySelector(&#x27;#kaleido-discovery-regenerate&#x27;);
+  const discoveryEmpty = root.querySelector(&#x27;#kaleido-discovery-empty&#x27;);
+  const discoveryBatch = root.querySelector(&#x27;#kaleido-discovery-batch&#x27;);
+  const discoveryStatus = root.querySelector(&#x27;#kaleido-discovery-status&#x27;);
+  const newProjectButton = root.querySelector(&#x27;#kaleido-new-project&#x27;);
+  const openProjectButton = root.querySelector(&#x27;#kaleido-open-project&#x27;);
+  const saveProjectButton = root.querySelector(&#x27;#kaleido-save-project&#x27;);
+  const projectFileInput = root.querySelector(&#x27;#kaleido-project-file&#x27;);
+  const newProjectConfirm = root.querySelector(&#x27;#kaleido-new-project-confirm&#x27;);
+  const confirmNewProjectButton = root.querySelector(&#x27;#kaleido-confirm-new-project&#x27;);
+  const cancelNewProjectButton = root.querySelector(&#x27;#kaleido-cancel-new-project&#x27;);
+  const projectStatus = root.querySelector(&#x27;#kaleido-project-status&#x27;);
   const resetButton = root.querySelector(&#x27;#kaleido-reset&#x27;);
   const centerSourceButton = root.querySelector(&#x27;#kaleido-center-source&#x27;);
   const centerRadialButton = root.querySelector(&#x27;#kaleido-center-radial&#x27;);
@@ -3688,6 +3814,8 @@ html&gt;body{padding:0}&lt;/style&gt;
   const favoriteThumbnailSize = 180;
   const favoriteLimit = 24;
   const favoriteStorageKey = &#x27;kaleidoscope-image-lab:favorites:v1&#x27;;
+  const discoveryBatchSize = 4;
+  const discoveryThumbnailSize = 132;
   const historyLimit = 80;
   const importRotation = -90;
   const maxCustomExportDimension = 4096;
@@ -4128,6 +4256,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   let favorites = [];
   let favoritesStorageAvailable = true;
   let favoritesClearPending = false;
+  let discoveryCandidates = [];
 
   const presets = [
     {
@@ -6017,6 +6146,7 @@ html&gt;body{padding:0}&lt;/style&gt;
 
   function createNewBlankCanvas() {
     paintingSource = createPaintingSource();
+    clearDiscoveryBatch();
     fileName.textContent = 'Blank Canvas';
     exportNameInput.value = getDefaultExportName('blank-canvas');
     exportWidthInput.value = String(canvas.width);
@@ -6920,6 +7050,142 @@ html&gt;body{padding:0}&lt;/style&gt;
       nextState.effectStack?.length ? &#x27;Effects&#x27; : null
     ].filter(Boolean);
     generatorStatus.textContent = `${proceduralGeneratorProfiles[categoryId].label} · ${proceduralGeneratorIntensities[intensityId].label} recipe applied${activeSystems.length ? ` · ${activeSystems.join(&#x27; + &#x27;)}` : &#x27;&#x27;}. Save it from Library → Favorites.`;
+  }
+
+  const discoveryFlavorProfiles = Object.freeze({
+    balanced: { label: &#x27;Balanced&#x27;, categories: [&#x27;balanced&#x27;] },
+    minimal: { label: &#x27;Minimal&#x27;, categories: [&#x27;minimal&#x27;] },
+    geometric: { label: &#x27;Geometric&#x27;, categories: [&#x27;geometric&#x27;] },
+    organic: { label: &#x27;Organic&#x27;, categories: [&#x27;organic&#x27;] },
+    psychedelic: { label: &#x27;Psychedelic&#x27;, categories: [&#x27;psychedelic&#x27;] },
+    dark: { label: &#x27;Dark&#x27;, categories: [&#x27;dark&#x27;] },
+    luminous: { label: &#x27;Luminous&#x27;, categories: [&#x27;luminous&#x27;] },
+    surprise: {
+      label: &#x27;Surprise Me&#x27;,
+      categories: [&#x27;balanced&#x27;, &#x27;minimal&#x27;, &#x27;geometric&#x27;, &#x27;organic&#x27;, &#x27;psychedelic&#x27;, &#x27;dark&#x27;, &#x27;luminous&#x27;, &#x27;bold&#x27;]
+    }
+  });
+
+  function getDiscoveryRecipe(flavorId, index) {
+    const profile = discoveryFlavorProfiles[flavorId] || discoveryFlavorProfiles.balanced;
+    const categoryIndex = flavorId === &#x27;surprise&#x27;
+      ? (Math.floor(Math.random() * profile.categories.length) + index) % profile.categories.length
+      : 0;
+    const intensityIds = [&#x27;gentle&#x27;, &#x27;balanced&#x27;, &#x27;dramatic&#x27;, &#x27;balanced&#x27;];
+    const categoryId = profile.categories[categoryIndex] || &#x27;balanced&#x27;;
+    const intensityId = intensityIds[index] || &#x27;balanced&#x27;;
+    return {
+      categoryId: proceduralGeneratorProfiles[categoryId] ? categoryId : &#x27;balanced&#x27;,
+      intensityId
+    };
+  }
+
+  function createDiscoveryThumbnail(settings) {
+    const thumbnailCanvas = document.createElement(&#x27;canvas&#x27;);
+    thumbnailCanvas.width = discoveryThumbnailSize;
+    thumbnailCanvas.height = discoveryThumbnailSize;
+    const thumbnailContext = thumbnailCanvas.getContext(&#x27;2d&#x27;);
+    thumbnailContext.fillStyle = &#x27;#0b1011&#x27;;
+    thumbnailContext.fillRect(0, 0, discoveryThumbnailSize, discoveryThumbnailSize);
+    drawActiveRenderer(thumbnailContext, discoveryThumbnailSize, discoveryThumbnailSize, previewSource, settings);
+    return favoriteDataUrl(thumbnailCanvas);
+  }
+
+  function updateDiscoveryAvailability() {
+    const hasSource = hasActiveSource();
+    discoverButton.disabled = !hasSource;
+    regenerateDiscoveryButton.disabled = !hasSource || discoveryCandidates.length === 0;
+    discoverButton.title = hasSource
+      ? &#x27;Generate four candidate compositions&#x27;
+      : &#x27;Load or create an image before discovering compositions&#x27;;
+  }
+
+  function renderDiscoveryBatch() {
+    discoveryEmpty.hidden = discoveryCandidates.length &gt; 0;
+    discoveryBatch.replaceChildren(...discoveryCandidates.map((candidate, index) =&gt; {
+      const card = document.createElement(&#x27;article&#x27;);
+      card.className = &#x27;kaleido-discovery-card&#x27;;
+      card.dataset.discoveryIndex = String(index);
+      const thumbnail = document.createElement(&#x27;img&#x27;);
+      thumbnail.className = &#x27;kaleido-discovery-thumbnail&#x27;;
+      thumbnail.alt = `${candidate.name} preview`;
+      thumbnail.src = candidate.thumbnail;
+      card.appendChild(thumbnail);
+      const title = document.createElement(&#x27;span&#x27;);
+      title.className = &#x27;kaleido-discovery-card-title&#x27;;
+      title.textContent = candidate.name;
+      card.appendChild(title);
+      const meta = document.createElement(&#x27;span&#x27;);
+      meta.className = &#x27;kaleido-discovery-card-meta&#x27;;
+      meta.textContent = `${candidate.flavor} · ${candidate.intensity}`;
+      card.appendChild(meta);
+      const applyButton = document.createElement(&#x27;button&#x27;);
+      applyButton.type = &#x27;button&#x27;;
+      applyButton.className = &#x27;btn btn-primary&#x27;;
+      applyButton.dataset.discoveryAction = &#x27;apply&#x27;;
+      applyButton.textContent = &#x27;Apply&#x27;;
+      applyButton.setAttribute(&#x27;aria-label&#x27;, `Apply ${candidate.name}`);
+      card.appendChild(applyButton);
+      return card;
+    }));
+    updateDiscoveryAvailability();
+  }
+
+  function clearDiscoveryBatch(message = &#x27;Load or create an image to begin.&#x27;) {
+    discoveryCandidates = [];
+    discoveryStatus.textContent = message;
+    renderDiscoveryBatch();
+  }
+
+  function generateDiscoveryBatch() {
+    if (!hasActiveSource()) return;
+    const flavorId = discoveryFlavorProfiles[discoveryFlavorInput.value] ? discoveryFlavorInput.value : &#x27;balanced&#x27;;
+    const baseState = getState();
+    const generatedCandidates = [];
+    for (let index = 0; index &lt; discoveryBatchSize; index += 1) {
+      const recipe = getDiscoveryRecipe(flavorId, index);
+      const state = createProceduralPresetState(baseState, recipe.categoryId, recipe.intensityId, {
+        pattern: true,
+        polar: true,
+        crystal: true,
+        effects: true
+      });
+      if (statesMatch(state, baseState) || generatedCandidates.some((candidate) =&gt; statesMatch(candidate.state, state))) {
+        const fallbackRotations = [-135, -90, -45, 0, 45, 90, 135];
+        const usedRotations = [baseState.rotation, ...generatedCandidates.map((candidate) =&gt; candidate.state.rotation)];
+        state.rotation = fallbackRotations.find((value) =&gt; !usedRotations.includes(value)) ?? fallbackRotations[index % fallbackRotations.length];
+      }
+      generatedCandidates.push({
+        name: `Candidate ${index + 1}`,
+        flavor: proceduralGeneratorProfiles[recipe.categoryId].label,
+        intensity: proceduralGeneratorIntensities[recipe.intensityId].label,
+        state,
+        thumbnail: createDiscoveryThumbnail(state)
+      });
+    }
+    discoveryCandidates = generatedCandidates;
+    renderDiscoveryBatch();
+    discoveryStatus.textContent = `${discoveryBatchSize} ${discoveryFlavorProfiles[flavorId].label.toLowerCase()} directions ready. The current composition is unchanged.`;
+  }
+
+  function applyDiscoveryCandidate(index) {
+    const candidate = discoveryCandidates[index];
+    if (!candidate) return;
+    const startState = getState();
+    stopAnimation();
+    presetSelect.value = &#x27;&#x27;;
+    applyState(candidate.state);
+    commitIfChanged(startState);
+    discoveryStatus.textContent = `${candidate.name} applied. Save it from Favorites when ready.`;
+    updateFavoritesAvailability();
+  }
+
+  function handleDiscoveryAction(event) {
+    const button = event.target.closest(&#x27;[data-discovery-action]&#x27;);
+    if (!button || !discoveryBatch.contains(button)) return;
+    if (button.dataset.discoveryAction === &#x27;apply&#x27;) {
+      applyDiscoveryCandidate(Number(button.closest(&#x27;[data-discovery-index]&#x27;)?.dataset.discoveryIndex));
+    }
   }
 
   function createSourceData(maxSourceSide) {
@@ -8199,6 +8465,186 @@ html&gt;body{padding:0}&lt;/style&gt;
     return { dataUrl: favoriteDataUrl(source.canvas), paintingSnapshot: false };
   }
 
+  function getDefaultProjectState() {
+    return {
+      segments: 2,
+      rotation: 0,
+      zoom: 1,
+      offsetX: 0,
+      offsetY: 0,
+      centerX: 0,
+      centerY: 0,
+      circularCrop: false,
+      alternateMirror: true,
+      mirrorLayerEnabled: true,
+      radialLayerEnabled: true,
+      mode: &#x27;alternating&#x27;,
+      renderMode: &#x27;mirror&#x27;,
+      geometryId: &#x27;mirror&#x27;,
+      polar: { ...defaultPolar },
+      crystal: { ...defaultCrystal },
+      pattern: { ...defaultPattern },
+      animation: normalizeAnimationState(defaultAnimation),
+      effectStack: []
+    };
+  }
+
+  function normalizeProjectState(state) {
+    const source = state &amp;&amp; typeof state === &#x27;object&#x27; &amp;&amp; !Array.isArray(state) ? state : {};
+    const defaults = getDefaultProjectState();
+    const controls = {
+      segments: pairedControls[0],
+      rotation: rotationControl,
+      zoom: zoomControl,
+      offsetX: offsetXControl,
+      offsetY: offsetYControl,
+      centerX: centerXControl,
+      centerY: centerYControl
+    };
+    const normalized = { ...defaults };
+    Object.entries(controls).forEach(([key, control]) =&gt; {
+      const value = Number.isFinite(Number(source[key])) ? Number(source[key]) : defaults[key];
+      normalized[key] = normalizeControlValue(control, value);
+    });
+    normalized.circularCrop = source.circularCrop === true;
+    normalized.alternateMirror = source.alternateMirror !== false;
+    normalized.mirrorLayerEnabled = source.mirrorLayerEnabled !== false;
+    normalized.radialLayerEnabled = source.radialLayerEnabled !== false;
+    normalized.mode = [&#x27;alternating&#x27;, &#x27;left&#x27;, &#x27;right&#x27;, &#x27;pinwheel&#x27;].includes(source.mode) ? source.mode : defaults.mode;
+    normalized.renderMode = source.renderMode === &#x27;radial&#x27; ? &#x27;radial&#x27; : defaults.renderMode;
+    normalized.geometryId = geometryManager.has(source.geometryId) ? source.geometryId : defaults.geometryId;
+    normalized.polar = { ...defaultPolar, ...(source.polar &amp;&amp; typeof source.polar === &#x27;object&#x27; ? source.polar : {}) };
+    normalized.crystal = { ...defaultCrystal, ...(source.crystal &amp;&amp; typeof source.crystal === &#x27;object&#x27; ? source.crystal : {}) };
+    normalized.pattern = { ...defaultPattern, ...(source.pattern &amp;&amp; typeof source.pattern === &#x27;object&#x27; ? source.pattern : {}) };
+    normalized.animation = normalizeAnimationState(source.animation || defaultAnimation);
+    normalized.effectStack = Array.isArray(source.effectStack)
+      ? normalizeEffectStack(source.effectStack)
+      : migrateLegacyEffects(source.effects);
+    return normalized;
+  }
+
+  function createProjectPayload() {
+    if (!hasActiveSource()) throw new Error(&#x27;Open an image or create a blank canvas before saving a project.&#x27;);
+    const sourceSnapshot = createFavoriteSourceSnapshot();
+    if (!sourceSnapshot?.dataUrl) throw new Error(&#x27;The current source could not be embedded safely in a project file.&#x27;);
+    return {
+      format: &#x27;kaleidoscope-image-lab-project&#x27;,
+      version: 1,
+      name: sanitizeExportName(exportNameInput.value || &#x27;kaleidoscope-project&#x27;),
+      source: {
+        type: sourceSnapshot.paintingSnapshot ? &#x27;painted-source&#x27; : &#x27;imported-image&#x27;,
+        dataUrl: sourceSnapshot.dataUrl
+      },
+      state: getState()
+    };
+  }
+
+  async function saveProject() {
+    setError(&#x27;&#x27;);
+    try {
+      const project = createProjectPayload();
+      const blob = new Blob([JSON.stringify(project, null, 2)], { type: &#x27;application/json&#x27; });
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement(&#x27;a&#x27;);
+      link.href = objectUrl;
+      link.download = &#x27;kaleidoscope-project.kilab.json&#x27;;
+      link.click();
+      window.setTimeout(() =&gt; URL.revokeObjectURL(objectUrl), 1000);
+      projectStatus.textContent = &#x27;Project saved. The current composition and history are unchanged.&#x27;;
+    } catch (saveError) {
+      projectStatus.textContent = saveError.message || &#x27;Project could not be saved.&#x27;;
+      setError(projectStatus.textContent);
+    }
+  }
+
+  function validateProjectPayload(project) {
+    if (!project || typeof project !== &#x27;object&#x27; || Array.isArray(project) || project.format !== &#x27;kaleidoscope-image-lab-project&#x27; || project.version !== 1) {
+      throw new Error(&#x27;Invalid project file: expected Kaleidoscope Image Lab format version 1.&#x27;);
+    }
+    if (!project.state || typeof project.state !== &#x27;object&#x27; || Array.isArray(project.state)) {
+      throw new Error(&#x27;Invalid project file: the required composition state is missing.&#x27;);
+    }
+    if (!project.source || ![&#x27;imported-image&#x27;, &#x27;painted-source&#x27;].includes(project.source.type) || typeof project.source.dataUrl !== &#x27;string&#x27; || !project.source.dataUrl.startsWith(&#x27;data:image/&#x27;)) {
+      throw new Error(&#x27;Invalid project file: the required source snapshot is missing or unsupported.&#x27;);
+    }
+  }
+
+  async function openProject(file) {
+    if (!file) return;
+    setError(&#x27;&#x27;);
+    projectStatus.textContent = &#x27;Opening project…&#x27;;
+    try {
+      const project = JSON.parse(await file.text());
+      validateProjectPayload(project);
+      const state = normalizeProjectState(project.state);
+      const image = await loadFavoriteImage(project.source.dataUrl);
+      stopAnimation();
+      if (sourceImage &amp;&amp; typeof sourceImage.close === &#x27;function&#x27;) sourceImage.close();
+      if (project.source.type === &#x27;painted-source&#x27;) {
+        const source = createUnrotatedSourceData(image, favoriteSourceLimit);
+        sourceImage = null;
+        importedPreviewSource = null;
+        paintingSource = createPaintingSource(source);
+        paintingMode = true;
+        previewSource = paintingSource;
+      } else {
+        sourceImage = image;
+        importedPreviewSource = null;
+        paintingSource = null;
+        paintingMode = false;
+        paintingDrag = null;
+        drawCoverImage();
+      }
+      drag = null;
+      wheelStartState = null;
+      window.clearTimeout(wheelCommitTimer);
+      wheelCommitTimer = 0;
+      fileName.textContent = `Project · ${project.name || &#x27;Untitled&#x27;}`;
+      exportNameInput.value = getDefaultExportName(project.name || &#x27;kaleidoscope-project&#x27;);
+      exportWidthInput.value = String(canvas.width);
+      exportHeightInput.value = String(canvas.height);
+      syncCustomAspectRatio();
+      setOriginalPreview(false);
+      clearDiscoveryBatch();
+      applyState(state);
+      updatePaintingUi();
+      drawSourceNavigator();
+      resetHistory();
+      updateFavoritesAvailability();
+      requestRender();
+      projectStatus.textContent = &#x27;Project opened. Animation settings were restored without autoplay.&#x27;;
+    } catch (openError) {
+      projectStatus.textContent = openError.message || &#x27;Project could not be opened.&#x27;;
+      setError(projectStatus.textContent);
+    } finally {
+      projectFileInput.value = &#x27;&#x27;;
+    }
+  }
+
+  function createNewProject() {
+    stopAnimation();
+    if (sourceImage &amp;&amp; typeof sourceImage.close === &#x27;function&#x27;) sourceImage.close();
+    sourceImage = null;
+    importedPreviewSource = null;
+    previewSource = null;
+    paintingSource = null;
+    paintingMode = false;
+    paintingDrag = null;
+    fileInput.value = &#x27;&#x27;;
+    newProjectConfirm.hidden = true;
+    createNewBlankCanvas();
+    projectStatus.textContent = &#x27;New project ready.&#x27;;
+  }
+
+  function requestNewProject() {
+    if (hasActiveSource()) {
+      newProjectConfirm.hidden = false;
+      projectStatus.textContent = &#x27;Confirm New Project to discard the current composition.&#x27;;
+      return;
+    }
+    createNewProject();
+  }
+
   function createFavoriteThumbnail(settings) {
     const thumbnailCanvas = document.createElement(&#x27;canvas&#x27;);
     thumbnailCanvas.width = favoriteThumbnailSize;
@@ -8257,6 +8703,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       : favorites.length &gt;= favoriteLimit
         ? `Favorites limit reached (${favoriteLimit}). Delete one before adding another.`
         : &#x27;Save the current composition to Favorites&#x27;;
+    updateDiscoveryAvailability();
   }
 
   function createFavoriteButton(label, action, favoriteId, className = &#x27;btn&#x27;) {
@@ -8624,6 +9071,7 @@ async function decodeImage(file) {
       wheelStartState = null;
       drag = null;
       drawCoverImage();
+      clearDiscoveryBatch();
       resetControls();
       updatePaintingUi();
       resetHistory();
@@ -8964,6 +9412,18 @@ async function decodeImage(file) {
   });
 
   favoritesGallery.addEventListener(&#x27;click&#x27;, handleFavoriteAction);
+  discoveryBatch.addEventListener(&#x27;click&#x27;, handleDiscoveryAction);
+  discoverButton.addEventListener(&#x27;click&#x27;, generateDiscoveryBatch);
+  regenerateDiscoveryButton.addEventListener(&#x27;click&#x27;, generateDiscoveryBatch);
+  newProjectButton.addEventListener(&#x27;click&#x27;, requestNewProject);
+  confirmNewProjectButton.addEventListener(&#x27;click&#x27;, createNewProject);
+  cancelNewProjectButton.addEventListener(&#x27;click&#x27;, () =&gt; {
+    newProjectConfirm.hidden = true;
+    projectStatus.textContent = &#x27;Current project kept.&#x27;;
+  });
+  saveProjectButton.addEventListener(&#x27;click&#x27;, saveProject);
+  openProjectButton.addEventListener(&#x27;click&#x27;, () =&gt; projectFileInput.click());
+  projectFileInput.addEventListener(&#x27;change&#x27;, () =&gt; openProject(projectFileInput.files[0]));
   addFavoriteButton.addEventListener(&#x27;click&#x27;, addFavorite);
   clearFavoritesButton.addEventListener(&#x27;click&#x27;, () =&gt; {
     favoritesClearPending = true;
