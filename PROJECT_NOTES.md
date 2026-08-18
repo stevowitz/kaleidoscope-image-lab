@@ -1,6 +1,6 @@
 # Kaleidoscope Image Lab - Current Project Notes
 
-Last updated: 2026-08-17
+Last updated: 2026-08-18
 
 ## 1. Purpose
 
@@ -991,6 +991,26 @@ Backup created and checksum-verified before editing:
 - `kaleidoscope-image-lab.html.backup-20260813-210718-milestone25-pre-wave-interference` (SHA-256 `3579ad57a4af5aa22d1803251f09732babe2894158b263cb2da0c9f27f1e3c92`)
 
 `DEVELOPMENT_MANUAL.md` was reviewed and not changed because the shared Pattern Pack contract and rendering architecture were preserved.
+
+### Final feature-freeze UI/UX polish — 2026-08-18
+
+- Completed a conservative final UI/UX polish pass without starting a milestone or changing rendering, state, animation, project, Pattern Pack, persistence, history, or export architecture.
+- Added one shared contextual-tooltip registry to the existing Floating UI hover/focus mechanism, with concise action-oriented guidance for Randomize/Mutate, locks, Pattern Pack, Polar, Crystal, Painting Guide, animation and recording, Effects, Discovery, Favorites, Presets, and Project actions. Existing `title` values remain as native fallback guidance, and tooltip triggers expose `aria-describedby` while open.
+- Tightened visible terminology with `Mutate`, `Pattern Scale`, `Pattern Rotation`, and `Pattern Center X/Y`; replaced the stale geometry future-milestone placeholder with a compact no-additional-settings message. Reset actions remain beside the controls they affect.
+- Added small narrow-layout adjustments for Discovery and Favorites action rows and tuned the dark tooltip surface to match the Optical Instrument palette. The canvas-first workspace rail, sticky Animation Playback group, collapsible sections, and single-control ownership remain unchanged.
+- Static QA passed: one intact outer `srcdoc`, decoded inner document, all three decoded inline scripts parsed, 244 unique DOM IDs with no duplicates, and `git diff --check` passed.
+- Localhost Chromium QA passed with a generated blank canvas: 199 tooltip triggers including dynamic animation and Organic Motion controls, hover and keyboard-focus tooltip exposure, clean tooltip dismissal, all six workspace panels, sticky Animation Playback, Play/Pause/Stop restoration status, Library and Procedural Preset reachability, New Project confirmation/cancel, 480px no-overflow inspection, and no application console/page errors. Recording entered and left its active state, but headless Chromium finalized without video data; saved recording artifact verification remains a physical desktop-browser check. Decorative CDN payloads were replaced with successful empty responses in the harness so the standalone document could initialize without network stalls; external CDN delivery itself was not revalidated.
+- Physical desktop-browser checks remain appropriate for native file-picker/drop behavior, real painting and pointer/wheel gestures, platform Save As/download inspection, JPEG compositing, and independent visual review.
+
+Files changed:
+
+- `kaleidoscope-image-lab.html`
+- `PROJECT_NOTES.md`
+- `DEVELOPMENT_MANUAL.md`
+
+Backup created before editing:
+
+- `kaleidoscope-image-lab.html.backup-20260818-feature-freeze-ui-pre`
 
 ## 12. Constraints for future changes
 

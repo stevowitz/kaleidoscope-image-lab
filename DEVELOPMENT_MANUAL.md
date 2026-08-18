@@ -259,6 +259,7 @@ The UI uses the dark “Optical Instrument” design system and a workflow-based
 - Native `details` elements provide the reusable collapsible-group component. Core task groups open by default; guidance, optional render stages, advanced systems, and unimplemented saved-work areas default closed. Closing a group never disables or clears its contents.
 - In Symmetry, preserve the core-first order: presets/exploration, geometry, symmetry transform, mode-specific radial origin, and reflection/crop. Present Pattern Pack, Polar, Crystal, and Advanced Layers afterward as optional progressive-disclosure stages.
 - Pattern Pack should read as Family → Pattern → Variant when relevant → Use As, followed by nested Placement and Appearance & Parameters controls. Keep active-only generated numeric parameters inside the existing metadata-driven container and retain Reset Pattern in the same section.
+- Use the existing shared tooltip mechanism for unfamiliar controls: add one concise, action-oriented `data-tooltip` message per existing control, retain a native `title` fallback where practical, and let the hover/focus layer provide `aria-describedby` rather than adding permanent helper text or one-off tooltip widgets.
 - The Animation workspace uses the shared disclosure-group pattern for playback, motion channels, Organic Motion, and recording. Library Favorites use the existing disclosure-group pattern and shared renderer/state paths; Effects uses the Milestone #12 ordered stack.
 - Outfit supplies interface hierarchy and IBM Plex Mono supplies measurement and output typography. Prism mint marks active creative controls; spectral amber marks optical/source indicators.
 
@@ -427,7 +428,7 @@ For milestone-specific acceptance tests and the regression checklist required af
 - Use the shared workspace tab, panel, disclosure-group, and empty-state patterns instead of duplicating navigation or section markup.
 - Keep advanced and experimental groups collapsed by default unless frequent use justifies otherwise.
 - Keep Symmetry Layers compact, discoverable, and consistent with the existing dark creative-tool interface.
-- Keep the Geometry selector and description compact; reserve the existing placeholder for future generator-specific settings.
+- Keep the Geometry selector and description compact; when no extra geometry settings exist, say so plainly instead of presenting future-feature placeholder copy.
 - Preserve the Optical Instrument design and responsive workspace hierarchy unless a new requirement supersedes them.
 
 ## 10. Feature backlog

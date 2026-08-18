@@ -2459,6 +2459,17 @@ html&gt;body{padding:0}&lt;/style&gt;
       scrollbar-width: thin;
     }
 
+    .tooltip {
+      border-color: rgb(103 226 206 / 0.3);
+      border-radius: 8px;
+      color: #eaf8f5;
+      background: #172229;
+      box-shadow: 0 12px 28px rgb(0 0 0 / 0.34), inset 0 1px 0 rgb(255 255 255 / 0.05);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
     #kaleidoscope-image-lab .kaleido-animation-playback {
       position: sticky;
       top: 0;
@@ -2855,6 +2866,19 @@ html&gt;body{padding:0}&lt;/style&gt;
         min-width: 0;
         padding-inline: 5px;
       }
+
+      #kaleidoscope-image-lab .kaleido-discovery-controls,
+      #kaleidoscope-image-lab .kaleido-discovery-footer {
+        grid-template-columns: 1fr;
+      }
+
+      #kaleidoscope-image-lab .kaleido-discovery-footer .btn {
+        width: 100%;
+      }
+
+      #kaleidoscope-image-lab .kaleido-favorites-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 520px) {
@@ -3066,7 +3090,7 @@ html&gt;body{padding:0}&lt;/style&gt;
               &lt;label class=&quot;kaleido-lock-chip&quot;&gt;&lt;input id=&quot;kaleido-lock-center&quot; type=&quot;checkbox&quot;&gt;&lt;span&gt;Center Position&lt;/span&gt;&lt;/label&gt;
             &lt;/div&gt;
           &lt;/details&gt;
-          &lt;button type=&quot;button&quot; id=&quot;kaleido-mutate&quot; class=&quot;btn&quot;&gt;Mutate Current&lt;/button&gt;
+          &lt;button type=&quot;button&quot; id=&quot;kaleido-mutate&quot; class=&quot;btn&quot;&gt;Mutate&lt;/button&gt;
           &lt;span class=&quot;kaleido-control-help&quot;&gt;Locks protect selected values for this session. They do not change the source image.&lt;/span&gt;
         &lt;/details&gt;
         &lt;details class=&quot;kaleido-control-group&quot; open&gt;
@@ -3080,7 +3104,7 @@ html&gt;body{padding:0}&lt;/style&gt;
             &lt;select id=&quot;kaleido-geometry&quot; class=&quot;kaleido-select&quot; aria-describedby=&quot;kaleido-geometry-description&quot;&gt;&lt;/select&gt;
           &lt;/label&gt;
           &lt;span id=&quot;kaleido-geometry-description&quot; class=&quot;kaleido-geometry-description&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;
-          &lt;div id=&quot;kaleido-geometry-settings&quot; class=&quot;kaleido-geometry-placeholder&quot;&gt;Geometry-specific settings will appear here when a future milestone implements them.&lt;/div&gt;
+          &lt;div id=&quot;kaleido-geometry-settings&quot; class=&quot;kaleido-geometry-placeholder&quot;&gt;No additional geometry settings.&lt;/div&gt;
         &lt;/details&gt;
         &lt;details class=&quot;kaleido-control-group&quot; open&gt;
           &lt;summary&gt;Symmetry Transform&lt;/summary&gt;
@@ -3161,19 +3185,19 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;details class=&quot;kaleido-subsection&quot; open&gt;
             &lt;summary&gt;Placement&lt;/summary&gt;
           &lt;label class=&quot;kaleido-control&quot; for=&quot;kaleido-pattern-scale&quot;&gt;
-            &lt;span&gt;Scale&lt;/span&gt;
+            &lt;span&gt;Pattern Scale&lt;/span&gt;
             &lt;span class=&quot;kaleido-slider-pair&quot;&gt;&lt;input id=&quot;kaleido-pattern-scale&quot; type=&quot;range&quot; min=&quot;0.15&quot; max=&quot;1.4&quot; step=&quot;0.01&quot; value=&quot;0.82&quot;&gt;&lt;input id=&quot;kaleido-pattern-scale-number&quot; type=&quot;number&quot; min=&quot;0.15&quot; max=&quot;1.4&quot; step=&quot;0.01&quot; value=&quot;0.82&quot; aria-label=&quot;Pattern scale&quot;&gt;&lt;/span&gt;
           &lt;/label&gt;
           &lt;label class=&quot;kaleido-control&quot; for=&quot;kaleido-pattern-rotation&quot;&gt;
-            &lt;span&gt;Rotation&lt;/span&gt;
+            &lt;span&gt;Pattern Rotation&lt;/span&gt;
             &lt;span class=&quot;kaleido-slider-pair&quot;&gt;&lt;input id=&quot;kaleido-pattern-rotation&quot; type=&quot;range&quot; min=&quot;-180&quot; max=&quot;180&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;input id=&quot;kaleido-pattern-rotation-number&quot; type=&quot;number&quot; min=&quot;-180&quot; max=&quot;180&quot; step=&quot;1&quot; value=&quot;0&quot; aria-label=&quot;Pattern rotation degrees&quot;&gt;&lt;/span&gt;
           &lt;/label&gt;
           &lt;label class=&quot;kaleido-control&quot; for=&quot;kaleido-pattern-center-x&quot;&gt;
-            &lt;span&gt;Center X&lt;/span&gt;
+            &lt;span&gt;Pattern Center X&lt;/span&gt;
             &lt;span class=&quot;kaleido-slider-pair&quot;&gt;&lt;input id=&quot;kaleido-pattern-center-x&quot; type=&quot;range&quot; min=&quot;-100&quot; max=&quot;100&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;input id=&quot;kaleido-pattern-center-x-number&quot; type=&quot;number&quot; min=&quot;-100&quot; max=&quot;100&quot; step=&quot;1&quot; value=&quot;0&quot; aria-label=&quot;Pattern center X percent&quot;&gt;&lt;/span&gt;
           &lt;/label&gt;
           &lt;label class=&quot;kaleido-control&quot; for=&quot;kaleido-pattern-center-y&quot;&gt;
-            &lt;span&gt;Center Y&lt;/span&gt;
+            &lt;span&gt;Pattern Center Y&lt;/span&gt;
             &lt;span class=&quot;kaleido-slider-pair&quot;&gt;&lt;input id=&quot;kaleido-pattern-center-y&quot; type=&quot;range&quot; min=&quot;-100&quot; max=&quot;100&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;input id=&quot;kaleido-pattern-center-y-number&quot; type=&quot;number&quot; min=&quot;-100&quot; max=&quot;100&quot; step=&quot;1&quot; value=&quot;0&quot; aria-label=&quot;Pattern center Y percent&quot;&gt;&lt;/span&gt;
           &lt;/label&gt;
           &lt;/details&gt;
@@ -3570,6 +3594,103 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;script&gt;
 (() =&gt; {
   const root = document.getElementById(&#x27;kaleidoscope-image-lab&#x27;);
+  const contextualTooltips = {
+    &#x27;label[for=kaleido-file]&#x27;: `Opens a source image from your computer.`,
+    &#x27;#kaleido-empty-open&#x27;: `Opens an image for the empty canvas.`,
+    &#x27;#kaleido-undo&#x27;: `Reverts the last committed composition change.`,
+    &#x27;#kaleido-redo&#x27;: `Restores the next change after Undo.`,
+    &#x27;#kaleido-randomize&#x27;: `Explores a bounded variation using the selected strength, scope, and locks.`,
+    &#x27;#kaleido-reset&#x27;: `Restores the main rendering controls to their defaults.`,
+    &#x27;#kaleido-export&#x27;: `Exports the current composition using the Library export settings.`,
+    &#x27;#kaleido-show-original&#x27;: `Temporarily reveals the unprocessed source while held or while the preview is focused.`,
+    &#x27;#kaleido-preview-background&#x27;: `Changes the canvas surround without changing exported pixels.`,
+    &#x27;#kaleido-hide-controls&#x27;: `Toggles a distraction-free canvas view.`,
+    &#x27;#kaleido-zoom&#x27;: `Changes source scale without changing the source pixels.`,
+    &#x27;#kaleido-offset-x&#x27;: `Moves the source image horizontally before symmetry is applied.`,
+    &#x27;#kaleido-offset-y&#x27;: `Moves the source image vertically before symmetry is applied.`,
+    &#x27;#kaleido-center-source&#x27;: `Returns the source image position to the centered default.`,
+    &#x27;#kaleido-preset&#x27;: `Applies a saved visual recipe to the current composition.`,
+    &#x27;#kaleido-generator-category&#x27;: `Chooses the visual direction used by the Procedural Preset Generator.`,
+    &#x27;#kaleido-generator-intensity&#x27;: `Controls how strongly the generated recipe changes the composition.`,
+    &#x27;#kaleido-generator-include-pattern&#x27;: `Includes the Pattern Pack stage in generated results.`,
+    &#x27;#kaleido-generator-include-polar&#x27;: `Includes the Polar stage in generated results.`,
+    &#x27;#kaleido-generator-include-crystal&#x27;: `Includes Crystal Mode in generated results.`,
+    &#x27;#kaleido-generator-include-effects&#x27;: `Includes an Effect Stack in generated results.`,
+    &#x27;#kaleido-generate-preset&#x27;: `Builds and applies one bounded procedural composition from these choices.`,
+    &#x27;#kaleido-regenerate-preset&#x27;: `Builds another composition using the current generator choices.`,
+    &#x27;#kaleido-randomize-strength&#x27;: `Sets how far Randomize may move eligible values.`,
+    &#x27;#kaleido-randomize-scope&#x27;: `Limits Randomize to the chosen part of the composition.`,
+    &#x27;.kaleido-randomizer-locks > summary&#x27;: `Choose values that Randomize and Mutate must preserve.`,
+    &#x27;#kaleido-mutate&#x27;: `Creates a controlled variation of the current composition while preserving locked values.`,
+    &#x27;[data-render-mode]&#x27;: `Switches between the established mirror and radial geometry workflows.`,
+    &#x27;#kaleido-geometry&#x27;: `Chooses the registered geometry used to map the source into the preview.`,
+    &#x27;#kaleido-segments&#x27;: `Sets how many repeated slices form the composition.`,
+    &#x27;#kaleido-rotation&#x27;: `Rotates the symmetry arrangement without moving the source image.`,
+    &#x27;#kaleido-rotate-left&#x27;: `Turns the symmetry arrangement 45 degrees counterclockwise.`,
+    &#x27;#kaleido-rotate-right&#x27;: `Turns the symmetry arrangement 45 degrees clockwise.`,
+    &#x27;#kaleido-center-x&#x27;: `Moves the radial origin horizontally.`,
+    &#x27;#kaleido-center-y&#x27;: `Moves the radial origin vertically.`,
+    &#x27;#kaleido-center-radial&#x27;: `Returns the radial origin to the center.`,
+    &#x27;[data-mode]&#x27;: `Chooses which mirror reflection style fills the repeated segments.`,
+    &#x27;#kaleido-alternate-mirror&#x27;: `Alternates reflection direction between radial segments.`,
+    &#x27;#kaleido-circular-crop&#x27;: `Clips the radial result to a circle.`,
+    &#x27;#kaleido-pattern-enabled&#x27;: `Turns the active Pattern Pack stage on or off.`,
+    &#x27;#kaleido-pattern-pack&#x27;: `Chooses the family of mathematical or geometric patterns.`,
+    &#x27;#kaleido-pattern&#x27;: `Chooses a pattern within the selected family.`,
+    &#x27;#kaleido-pattern-use-mode&#x27;: `Chooses whether the pattern overlays, masks, or guides the artwork.`,
+    &#x27;#kaleido-pattern-scale&#x27;: `Changes the size of the active pattern without resizing the source image.`,
+    &#x27;#kaleido-pattern-rotation&#x27;: `Rotates the active pattern independently of the symmetry rotation.`,
+    &#x27;#kaleido-pattern-center-x&#x27;: `Moves the active pattern horizontally.`,
+    &#x27;#kaleido-pattern-center-y&#x27;: `Moves the active pattern vertically.`,
+    &#x27;#kaleido-pattern-line-width&#x27;: `Changes the stroke thickness of line-based patterns.`,
+    &#x27;#kaleido-pattern-line-color&#x27;: `Sets the color used by visible pattern strokes.`,
+    &#x27;#kaleido-pattern-opacity&#x27;: `Changes pattern visibility without changing the source image.`,
+    &#x27;#kaleido-reset-pattern&#x27;: `Restores Pattern Pack settings and disables its active treatment.`,
+    &#x27;#kaleido-polar-mode&#x27;: `Chooses the Polar transformation; Off leaves the composition unchanged.`,
+    &#x27;#kaleido-reset-polar&#x27;: `Restores Polar settings and turns the Polar stage off.`,
+    &#x27;#kaleido-crystal-mode&#x27;: `Chooses the Crystal treatment; Off leaves the composition unchanged.`,
+    &#x27;#kaleido-reset-crystal&#x27;: `Restores Crystal settings and turns Crystal Mode off.`,
+    &#x27;#kaleido-painting-enabled&#x27;: `Paints into the active source using the symmetry engine.`,
+    &#x27;#kaleido-pattern-guide&#x27;: `Shows the active pattern as a non-destructive drawing guide; guides are not exported.`,
+    &#x27;#kaleido-new-blank-canvas&#x27;: `Creates a blank source canvas for painting.`,
+    &#x27;#kaleido-painting-brush&#x27;: `Chooses the brush behavior used for painting strokes.`,
+    &#x27;#kaleido-painting-size&#x27;: `Changes brush diameter in source pixels.`,
+    &#x27;#kaleido-painting-opacity&#x27;: `Changes brush transparency without changing the source canvas size.`,
+    &#x27;#kaleido-painting-color&#x27;: `Sets the color used for new painting strokes.`,
+    &#x27;#kaleido-animation-play&#x27;: `Starts live preview playback without changing base controls.`,
+    &#x27;#kaleido-animation-pause&#x27;: `Pauses playback while keeping the current animation phase.`,
+    &#x27;#kaleido-animation-stop&#x27;: `Stops playback and restores the exact base composition.`,
+    &#x27;#kaleido-animation-speed&#x27;: `Scales the speed of every enabled motion channel.`,
+    &#x27;#kaleido-animation-reset-channels&#x27;: `Disables motion channels and restores their defaults.`,
+    &#x27;#kaleido-animation-reset-organic&#x27;: `Disables Organic Motion and restores its defaults.`,
+    &#x27;#kaleido-recording-quality&#x27;: `Chooses the bitrate for the preview recording.`,
+    &#x27;#kaleido-recording-start&#x27;: `Records the animated 1200 by 1200 preview.`,
+    &#x27;#kaleido-recording-stop&#x27;: `Stops and saves the current preview recording.`,
+    &#x27;#kaleido-effect-type&#x27;: `Chooses the next effect to add to the finishing chain.`,
+    &#x27;#kaleido-add-effect&#x27;: `Adds the selected effect to the top-to-bottom finishing chain.`,
+    &#x27;#kaleido-effect-stack-reset&#x27;: `Removes all effects and returns the stack to neutral.`,
+    &#x27;#kaleido-discovery-flavor&#x27;: `Chooses the visual flavor used to generate four candidates.`,
+    &#x27;#kaleido-discover&#x27;: `Generates four directions without changing the current composition.`,
+    &#x27;#kaleido-discovery-regenerate&#x27;: `Replaces the current candidate batch with four new directions.`,
+    &#x27;#kaleido-export-name&#x27;: `Sets the base filename used for the next image export.`,
+    &#x27;#kaleido-export-size&#x27;: `Chooses the output dimensions; Automatic uses the original-derived size.`,
+    &#x27;#kaleido-export-format&#x27;: `Chooses PNG transparency or JPEG compositing for export.`,
+    &#x27;#kaleido-add-favorite&#x27;: `Saves the current composition as a restorable in-app Favorite.`,
+    &#x27;#kaleido-clear-favorites&#x27;: `Shows a confirmation before removing every Favorite.`,
+    &#x27;#kaleido-confirm-clear-favorites&#x27;: `Removes every saved Favorite.`,
+    &#x27;#kaleido-cancel-clear-favorites&#x27;: `Keeps the saved Favorites and closes the confirmation.`,
+    &#x27;#kaleido-new-project&#x27;: `Starts a clean composition. Unsaved work may be discarded.`,
+    &#x27;#kaleido-open-project&#x27;: `Loads a saved Kaleidoscope Image Lab project file.`,
+    &#x27;#kaleido-save-project&#x27;: `Saves the current composition as a restorable .kilab.json project.`,
+    &#x27;#kaleido-confirm-new-project&#x27;: `Discards the current composition and starts a clean project.`,
+    &#x27;#kaleido-cancel-new-project&#x27;: `Keeps the current composition and closes the confirmation.`
+  };
+  Object.entries(contextualTooltips).forEach(([selector, content]) =&gt; {
+    root.querySelectorAll(selector).forEach((trigger) =&gt; {
+      trigger.dataset.tooltip = content;
+      trigger.setAttribute(&#x27;title&#x27;, content);
+    });
+  });
   const canvas = root.querySelector(&#x27;#kaleido-canvas&#x27;);
   const ctx = canvas.getContext(&#x27;2d&#x27;, { willReadFrequently: true });
   const canvasWrap = root.querySelector(&#x27;.kaleido-canvas-wrap&#x27;);
@@ -5224,6 +5345,15 @@ html&gt;body{padding:0}&lt;/style&gt;
       input.step = String(step);
       input.value = formatValue(value, decimals);
     });
+    const tooltip = labelText === &#x27;Amount&#x27;
+      ? `Sets the strength of this temporary motion in the target control units.`
+      : labelText === &#x27;Speed&#x27;
+        ? `Sets the cycles per second for this motion channel.`
+        : `Sets the orbit radius used by this motion channel.`;
+    [range, number].forEach((input) =&gt; {
+      input.dataset.tooltip = tooltip;
+      input.title = tooltip;
+    });
     pair.append(range, number);
     label.append(title, pair);
     return { label, range, number, decimals, minimum, maximum };
@@ -5273,6 +5403,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     toggle.type = &#x27;checkbox&#x27;;
     toggle.id = `kaleido-organic-${definition.id}-enabled`;
     toggle.setAttribute(&#x27;aria-label&#x27;, `Enable organic motion for ${definition.label}`);
+    toggle.dataset.tooltip = `Enables temporary Organic Motion for ${definition.label}.`;
+    toggle.title = toggle.dataset.tooltip;
     toggleLabel.append(toggleText, toggle);
 
     const styleLabel = document.createElement(&#x27;label&#x27;);
@@ -5283,6 +5415,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     const styleSelect = document.createElement(&#x27;select&#x27;);
     styleSelect.id = `kaleido-organic-${definition.id}-style`;
     styleSelect.className = &#x27;kaleido-select&#x27;;
+    styleSelect.dataset.tooltip = `Chooses the Organic Motion signal for ${definition.label}.`;
+    styleSelect.title = styleSelect.dataset.tooltip;
     [
       [&#x27;drift&#x27;, &#x27;Drift&#x27;], [&#x27;orbit&#x27;, &#x27;Orbit&#x27;], [&#x27;breathe&#x27;, &#x27;Breathe / Pulse&#x27;],
       [&#x27;wobble&#x27;, &#x27;Wobble&#x27;], [&#x27;wander&#x27;, &#x27;Wander&#x27;]
@@ -5379,6 +5513,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       toggle.type = &#x27;checkbox&#x27;;
       toggle.id = `kaleido-animation-${definition.id}-enabled`;
       toggle.setAttribute(&#x27;aria-label&#x27;, `Animate ${definition.label}`);
+      toggle.dataset.tooltip = `Enables temporary motion for ${definition.label}.`;
+      toggle.title = toggle.dataset.tooltip;
       toggleLabel.append(toggleText, toggle);
       const settings = document.createElement(&#x27;div&#x27;);
       settings.className = &#x27;kaleido-animation-channel-settings&#x27;;
@@ -7125,6 +7261,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       applyButton.dataset.discoveryAction = &#x27;apply&#x27;;
       applyButton.textContent = &#x27;Apply&#x27;;
       applyButton.setAttribute(&#x27;aria-label&#x27;, `Apply ${candidate.name}`);
+      applyButton.dataset.tooltip = `Applies ${candidate.name} and replaces the current composition once.`;
+      applyButton.title = applyButton.dataset.tooltip;
       card.appendChild(applyButton);
       return card;
     }));
@@ -8713,6 +8851,21 @@ html&gt;body{padding:0}&lt;/style&gt;
     button.textContent = label;
     button.dataset.favoriteAction = action;
     button.dataset.favoriteId = favoriteId;
+    const tooltip = action === &#x27;restore&#x27;
+      ? `Restores this Favorite as the current composition.`
+      : action === &#x27;rename&#x27;
+        ? `Changes the saved name shown for this Favorite.`
+        : action === &#x27;delete&#x27;
+          ? `Removes this Favorite from the in-app gallery.`
+          : action === &#x27;save-name&#x27;
+            ? `Saves the edited Favorite name.`
+            : action === &#x27;cancel-rename&#x27;
+              ? `Cancels the Favorite name edit.`
+              : &#x27;&#x27;;
+    if (tooltip) {
+      button.dataset.tooltip = tooltip;
+      button.title = tooltip;
+    }
     return button;
   }
 
